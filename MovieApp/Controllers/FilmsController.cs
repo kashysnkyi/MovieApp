@@ -17,14 +17,10 @@ namespace MovieApp.Controllers
         {
             _context = context;
         }
-
-        // GET: Films
         public async Task<IActionResult> Index()
         {
             return View(await _context.Films.ToListAsync());
         }
-
-        // GET: Films/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,15 +38,11 @@ namespace MovieApp.Controllers
             return View(film);
         }
 
-        // GET: Films/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Films/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Duration,Description,Releasedate")] Film film)
@@ -64,7 +56,6 @@ namespace MovieApp.Controllers
             return View(film);
         }
 
-        // GET: Films/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,9 +71,6 @@ namespace MovieApp.Controllers
             return View(film);
         }
 
-        // POST: Films/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Duration,Description,Releasedate")] Film film)
@@ -114,8 +102,6 @@ namespace MovieApp.Controllers
             }
             return View(film);
         }
-
-        // GET: Films/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,7 +119,6 @@ namespace MovieApp.Controllers
             return View(film);
         }
 
-        // POST: Films/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

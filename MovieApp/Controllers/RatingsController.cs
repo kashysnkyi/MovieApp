@@ -18,14 +18,12 @@ namespace MovieApp.Controllers
             _context = context;
         }
 
-        // GET: Ratings
         public async Task<IActionResult> Index()
         {
             var movieDbContext = _context.Ratings.Include(r => r.Film).Include(r => r.User);
             return View(await movieDbContext.ToListAsync());
         }
 
-        // GET: Ratings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,7 +43,6 @@ namespace MovieApp.Controllers
             return View(rating);
         }
 
-        // GET: Ratings/Create
         public IActionResult Create()
         {
             ViewData["Filmid"] = new SelectList(_context.Films, "Id", "Id");
@@ -53,9 +50,6 @@ namespace MovieApp.Controllers
             return View();
         }
 
-        // POST: Ratings/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Userid,Filmid,Score,Rateddate")] Rating rating)
@@ -71,7 +65,6 @@ namespace MovieApp.Controllers
             return View(rating);
         }
 
-        // GET: Ratings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,9 +82,6 @@ namespace MovieApp.Controllers
             return View(rating);
         }
 
-        // POST: Ratings/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Userid,Filmid,Score,Rateddate")] Rating rating)
@@ -125,8 +115,6 @@ namespace MovieApp.Controllers
             ViewData["Userid"] = new SelectList(_context.Users, "Id", "Id", rating.Userid);
             return View(rating);
         }
-
-        // GET: Ratings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -146,7 +134,6 @@ namespace MovieApp.Controllers
             return View(rating);
         }
 
-        // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
